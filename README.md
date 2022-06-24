@@ -1,126 +1,52 @@
-# Scala Kata Starter Code
+# Robot Warehouse
 
-This repository contains starter code for attempting a Scala kata exercise.
+We have installed a robot in our warehouse and now we need to be able to send it commands to control it. We need you to implement the control mechanism.
 
-It assumes that you have Java, Scala and Scala Build Tool (SBT) installed.
+For convenience the robot moves along a grid in the roof of the warehouse and we have made sure that all of our warehouses are built so that the dimensions of the grid are 10 by 10. We've also made sure that all our warehouses are aligned along north-south and east-west axes.
 
-If you haven't yet installed these, it's worth following the instructions on the Scala refresh exercises regarding Scala setup and installation
+All of the commands to the robot consist of a single capital letter and different commands are dilineated by whitespace.
 
-https://github.com/techreturners/scala_coding_exercises
+## Part One
 
-## Instructions
+The robot should accept the following commands:
 
-To utilise this starter code
+* N move north
+* W move west
+* E move east
+* S move south
 
-### 1. Create a new folder on your computer that will house the starter code.
+### Example command sequences
 
-For example if you are working on a bowling game kata, using the command line you would do:
+The command sequence: "N E S W" will move the robot in a full square, returning it to where it started.
 
-```
-mkdir bowling-game-kata
-```
+If the robot starts in the south-west corner of the warehouse then the following commands will move it to the middle of the warehouse.
 
-### 2. Change to the directory and pull this code
+"N E N E N E N E"
 
-Next navigate to that directory and `git pull` this code
+### Requirements
 
-```
-cd bowling-game-kata
-```
+* Create a way to send a series of commands to the robot
+* Make sure that the robot doesn't try to move outside the warehouse
 
-Initialise git
+## Part two
 
-```
-git init
-```
+The robot is equipped with a lifting claw which can be used to move crates around the warehouse. We track the locations of all the crates in the warehouse.
 
-And then pull the starter code
+Model the presence of crates in the warehouse. Initially one is in the centre and one in the north-east corner.
 
-```
-git pull https://github.com/techreturners/lm-code-kata-scala-starter.git
-```
+Extend the robot's commands to include the following:
 
-Once the code has been pulled then rename the branch to **main**
+* G grab a crate and lift it
+* D drop a crate gently to the ground
 
-```
-git branch -M main
-```
+There are some rules about moving crates:
 
-### 3. Open up GitHub.com and create a new repository
+* The robot should not try and lift a crate if it already lifting one
+* The robot should not lift a crate if there is not one present
+* The robot should not drop a crate on another crate!
 
-Go to GitHub.com and create a new repository.
+## Part three
 
-Give the repository a name - suggest naming the repository the same name as your folder
+We have expanded the robot's grid system to include diagonal tracks. Modify the robot's movement so that it can take advantage of the new diagonals. We don't want to change all the movement programmes though so don't change the syntax of the commands we send.
 
-Make sure it is **Private**
-
-Then leave everything else as blank. So do NOT create a README, GitIgnore or Licence.
-
-Click **Create repository**
-
-### 4. Copy URL of new repository
-
-You should then see a screen telling you how to push to the repository.
-
-Copy the URL of the repository. For example if a user called **pluto** had created a repository called **bowling-game-kata** then the URL would be:
-
-https://github.com/pluto/bowling-game-kata.git
-
-### 5. Push starter code back to repository
-
-Then back on your computer whilst within your newly created directory. 
-
-Configure your GitHub origin server (for where you will be pushing code back to)
-
-```
-git remote add origin URL_YOU_COPIED
-```
-
-Replacing the **URL_YOU_COPIED** with the correct URL. For example:
-
-```
-git remote add origin https://github.com/pluto/bowling-game-kata.git
-```
-
-Now you can push the code to your repository
-
-```
-git push -u origin main
-```
-
-### 6. Make sure you can run the tests
-
-You should now be able to run the Scala tests either from the command line or your editor (such as IntelliJ)
-
-```
-sbt test
-```
-
-Should produce output similar to the following:
-
-```
-[info] welcome to sbt 1.6.2 (Azul Systems, Inc. Java 11.0.14)
-[info] loading global plugins from /Users/someuser/.sbt/1.0/plugins
-[info] loading project definition from /Users/someuser/Developer/techreturners/yrtt/lm-code-kata-scala-starter/project
-[info] loading settings for project root from build.sbt ...
-[info] set current project to lm-code-kata-scala-starter (in build file:/Users/someuser/Developer/techreturners/yrtt/lm-code-kata-scala-starter/)
-[info] compiling 1 Scala source to /Users/someuser/Developer/techreturners/yrtt/lm-code-kata-scala-starter/target/scala-2.13/classes ...
-[info] compiling 1 Scala source to /Users/someuser/Developer/techreturners/yrtt/lm-code-kata-scala-starter/target/scala-2.13/test-classes ...
-[info] AppTest:
-[info] A string from the app
-[info] - should be Hi from Tech Returners
-[info] Run completed in 193 milliseconds.
-[info] Total number of tests run: 1
-[info] Suites: completed 1, aborted 0
-[info] Tests: succeeded 1, failed 0, canceled 0, ignored 0, pending 0
-[info] All tests passed.
-[success] Total time: 3 s, completed 30 Apr 2022, 22:05:47
-```
-
-If you do see it run the tests then you're all ready to go 🙌
-
-### 7. Utilise repository as normal
-
-Now you can continue to utilise the repository as normal, committing and pushing as normal.
-
-
+So for example if the robot starts in the south-west corner of the warehouse then issuing the command "E N" should move the robot to the same place as if it moved east once and north once but it should only move once.
